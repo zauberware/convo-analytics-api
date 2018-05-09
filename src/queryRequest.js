@@ -7,20 +7,8 @@ class QueryRequest extends JSONApiRequest {
 
     this.language = application.language;
 
-    // if ('timezone' in options) {
-    //   this.timezone = options.timezone;
-    // }
-
-    if ('resetContexts' in options) {
-      this.resetContexts = options.resetContexts;
-    }
-
-    if ('contexts' in options) {
-      this.contexts = options.contexts;
-    }
-
-    if ('entities' in options) {
-      this.entities = options.entities;
+    if ('timezone' in options) {
+      this.timezone = options.timezone;
     }
 
     if ('sessionId' in options) {
@@ -28,6 +16,14 @@ class QueryRequest extends JSONApiRequest {
     } else {
       throw Error(
         'Now \'sessionId\' is required parameter. Please add this parameter to \'options\' of request.'
+      );
+    }
+
+    if ('messageId' in options) {
+      this.messageId = options.messageId;
+    } else {
+      throw Error(
+        'Now \'messageId\' is required parameter. Please add this parameter to \'options\' of request.'
       );
     }
 
@@ -45,7 +41,7 @@ class QueryRequest extends JSONApiRequest {
   }
 
   _requestOptions () {
-    var path = 'query';
+    var path = '';
 
     if (this.hasOwnProperty('version')) {
       path += '?v=' + this.version;
@@ -61,24 +57,16 @@ class QueryRequest extends JSONApiRequest {
 
   _jsonRequestParameters () {
     var json = {
-      // 'timezone': this.timezone,
-      'lang': this.language,
+      'timezone': this.timezone,
+      'language': this.language
     };
 
-    if ('resetContexts' in this) {
-      json.resetContexts = this.resetContexts;
-    }
-
-    if ('contexts' in this) {
-      json.contexts = this.contexts;
-    }
-
-    if ('entities' in this) {
-      json.entities = this.entities;
-    }
-
     if ('sessionId' in this) {
-      json.sessionId = this.sessionId;
+      json.session = this.sessionId;
+    }
+
+    if ('messageId' in this) {
+      json.messageId = this.messageId;
     }
 
     if ('originalRequest' in this) {

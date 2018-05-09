@@ -6,6 +6,8 @@ class TextRequest extends QueryRequest {
   constructor (application, query, options) {
     super(application, options);
     this.query = query;
+
+    this.doRequest();
   }
 
   _headers () {
@@ -16,7 +18,7 @@ class TextRequest extends QueryRequest {
 
   _jsonRequestParameters () {
     var json = super._jsonRequestParameters();
-    json.query = this.query;
+    json.queryResult = this.query;
     return json;
   }
 

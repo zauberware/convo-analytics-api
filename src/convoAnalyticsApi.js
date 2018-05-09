@@ -9,7 +9,7 @@ var https = require('https');
 var version = '20180509';
 var language = 'en';
 var hostname = 'ocjdjdwcvl.execute-api.eu-central-1.amazonaws.com';
-var endpoint = '/latest/message';
+var endpoint = '/latest/message/';
 var defaultSource = 'node';
 
 class ConvoAnalyticsApi {

@@ -14,11 +14,16 @@ class ApiRequest extends EventEmitter {
     self.endpoint = options.endpoint;
     self.requestSource = application.requestSource;
 
+    self._agent = application._agent;
+
+  }
+
+  doRequest (){
+    var self = this;
     var requestOptions = self._requestOptions();
 
-    requestOptions.agent = application._agent;
+    requestOptions.agent = self._agent;
 
-    console.log(requestOptions);
     var request = https.request(requestOptions, function (response) {
       self._handleResponse(response);
     });

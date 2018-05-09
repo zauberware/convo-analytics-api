@@ -6,7 +6,7 @@ import ApiRequest from './apiRequest';
 
 class JSONApiRequest extends ApiRequest {
   _handleResponse (response) {
-    // var self = this;
+    var self = this;
 
     var body = '';
 
@@ -26,21 +26,20 @@ class JSONApiRequest extends ApiRequest {
       buffers = [];
       bufferLength = 0;
       var statusOk = 200;
-      var statusOkEnd = 200;
+      var statusOkEnd = 399;
 
       if (response.statusCode >= statusOk && response.statusCode <= statusOkEnd) {
         try {
-          console.log(JSON.parse(body));
-          // var json_body = JSON.parse(body);
-          // console.log(body);
-          // self.emit('response', json_body);
+          var json_body = JSON.parse(body);
+          console.log(json_body);
+          self.emit('response', json_body);
         } catch (error) {
           //  JSON.parse can throw only one exception, SyntaxError
           // All another exceptions throwing from user function,
           // because it just rethrowing for better error handling.
 
           if (error instanceof SyntaxError) {
-            // self.emit('error', error);
+            self.emit('error', error);
             console.log(error);
           } else {
             throw error;
@@ -50,7 +49,7 @@ class JSONApiRequest extends ApiRequest {
         console.log(response.statusCode);
         console.log('Wrong response status code.');
         // var error = new ServerError(response.statusCode, body, 'Wrong response status code.');
-        // self.emit('error', error);
+        self.emit('error', 'Wrong response status code.');
       }
     });
   }
