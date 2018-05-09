@@ -1,0 +1,57 @@
+{
+  "name": "convo-analytics-api",
+  "version": "0.0.8",
+  "description": "JS API client for convo.anayltics",
+  "main": "./lib/convoAnalyticsApi.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "test": "cross-env BABEL_ENV=commonjs mocha --require babel-core/register --recursive",
+    "test:watch": "npm test -- --watch",
+    "test:examples": "node examples/",
+    "cover": "cross-env BABEL_ENV=commonjs istanbul cover _mocha -- --require babel-core/register --recursive",
+    "lint": "eslint src test",
+    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "prepublish": "npm run clean && npm run lint && npm run test && npm run build"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zauberware/convo-analytics-api.git"
+  },
+  "keywords": [
+    "chat",
+    "chatbot",
+    "conversation",
+    "analytics",
+    "analyse",
+    "javascript",
+    "api",
+    "client-api"
+  ],
+  "author": "Simon Franzen <simon@zauberware.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zauberware/convo-analytics-api/issues"
+  },
+  "homepage": "https://github.com/zauberware/convo-analytics-api#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "cross-env": "^5.1.3",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^5.0.0",
+    "rimraf": "^2.6.2",
+    "commander": "^2.15.1",
+    "glob": "^7.1.2"
+  }
+}
