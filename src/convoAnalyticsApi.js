@@ -24,7 +24,7 @@ class ConvoAnalyticsApi {
     this._agent = new https.Agent({ keepAlive: true });
   }
 
-  textRequest (query, options) {
+  textRequest (message, options) {
     var self = this;
     var opt = options || {};
 
@@ -35,8 +35,8 @@ class ConvoAnalyticsApi {
     if (!('version' in opt)) {
       opt.version = self.version;
     }
-
-    return new TextRequest(self, query, opt);
+    console.log(message);
+    return new TextRequest(self, message, opt);
   }
 }
 

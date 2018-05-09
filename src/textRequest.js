@@ -3,10 +3,8 @@ import QueryRequest from './queryRequest';
 // var util = require('util');
 
 class TextRequest extends QueryRequest {
-  constructor (application, query, options) {
-    super(application, options);
-    this.query = query;
-
+  constructor (application, message, options) {
+    super(application, message, options);
     this.doRequest();
   }
 
@@ -18,7 +16,9 @@ class TextRequest extends QueryRequest {
 
   _jsonRequestParameters () {
     var json = super._jsonRequestParameters();
-    json.queryResult = this.query;
+    json.messageType = 'TextRequest';
+    console.log('params');
+    console.log(json);
     return json;
   }
 
