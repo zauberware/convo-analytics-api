@@ -1,18 +1,14 @@
-# Why? [![Build Status](https://travis-ci.org/Travelport-Ukraine/npm-module-boilerplate.svg?branch=master)](https://travis-ci.org/Travelport-Ukraine/npm-module-boilerplate)
-:page_with_curl: Boilerplate for npm/node module. Write with ES6 - have compatibility with all node versions.
+# Convo Analytics JS API client
 
-This boilerplate is for people who want write code using all ES6 features ( and stage-2 ) but also want/need backward compatibility with old node versions. 
-
-# Node version
-
-This boilerplate uses `babel-preset-env`. Supported `node` version can be defined in `.babelrc`. 
+For connecting with the convo analytics API. 
 
 # Features
-* Build with [Babel](https://babeljs.io). (ES6 -> ES5)
-* Test with [mocha](https://mochajs.org).
-* Cover with [istanbul](https://github.com/gotwarlost/istanbul).
-* Check with [eslint](eslint.org).
-* Deploy with [Travis](travis-ci.org).
+* Send textMessages to your account
+
+# Upcoming
+* Send imageMessage to your account
+* Send audioMessage to your account
+* Send videoMessage to your account
 
 # Commands
 - `npm run clean` - Remove `lib/` directory
@@ -25,5 +21,5 @@ This boilerplate uses `babel-preset-env`. Supported `node` version can be define
 - `npm run prepublish` - Hook for npm. Do all the checks before publishing you module.
 
 # Installation
-Just clone this repo and remove `.git` folder.
+Just clone this repo and run `npm install`.
 
