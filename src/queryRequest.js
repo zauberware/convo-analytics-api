@@ -1,8 +1,7 @@
 import JSONApiRequest from './JSONApiRequest';
-// var util = require('util');
 
 class QueryRequest extends JSONApiRequest {
-  constructor (application, message, options) {
+  constructor(application, message, options) {
     super(application, options);
 
     this.language = application.language;
@@ -16,33 +15,23 @@ class QueryRequest extends JSONApiRequest {
       this.timezone = options.timezone;
     }
 
-    if ('version' in options) {
-      this.version = options.version;
-    }
-
     // Check for message date
     if ('sessionId' in message) {
       this.sessionId = message.sessionId;
     } else {
-      throw Error(
-        'Now \'sessionId\' is required parameter. Please add this parameter to \'options\' of request.'
-      );
+      throw Error('Now "sessionId" is required parameter. Please add this parameter to "options" of request.');
     }
 
     if ('messageId' in message) {
       this.messageId = message.messageId;
     } else {
-      throw Error(
-        'Now \'messageId\' is required parameter. Please add this parameter to \'options\' of request.'
-      );
+      throw Error('Now "messageId" is required parameter. Please add this parameter to "options" of request.');
     }
 
     if ('sentTimestamp' in message) {
       this.sentTimestamp = message.sentTimestamp;
     } else {
-      throw Error(
-        'Now \'sentTimestamp\' is required parameter. Please add this parameter to \'options\' of request.'
-      );
+      throw Error('Now "sentTimestamp" is required parameter. Please add this parameter to "options" of request.');
     }
 
     if ('type' in message) {
@@ -64,31 +53,26 @@ class QueryRequest extends JSONApiRequest {
     if ('originalRequest' in message) {
       this.originalRequest = message.originalRequest;
     }
-
   }
 
-  _requestOptions () {
-    var path = '';
+  requestOptions() {
+    let requestOptions = {};
 
-    if (this.hasOwnProperty('version')) {
-      path += '?v=' + this.version;
-    }
+    requestOptions = super.requestOptions();
 
-    var request_options = super._requestOptions();
+    requestOptions.path = this.endpoint;
+    requestOptions.method = 'POST';
 
-    request_options.path = this.endpoint + path;
-    request_options.method = 'POST';
-
-    return request_options;
+    return requestOptions;
   }
 
-  _jsonRequestParameters () {
-    var json = {
-      'timezone': this.timezone,
-      'language': this.language,
-      'sessionId': this.sessionId,
-      'messageId': this.messageId,
-      'sentTimestamp': this.sentTimestamp
+  jsonRequestParameters() {
+    const json = {
+      timezone: this.timezone,
+      language: this.language,
+      sessionId: this.sessionId,
+      messageId: this.messageId,
+      sentTimestamp: this.sentTimestamp,
     };
 
     if ('type' in this) {
@@ -106,7 +90,6 @@ class QueryRequest extends JSONApiRequest {
     if ('channel' in this) {
       json.channel = this.channel;
     }
-
 
     if ('originalRequest' in this) {
       json.originalRequest = this.originalRequest;

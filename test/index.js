@@ -23,7 +23,12 @@ describe('Module exists', () => {
 
   it('should accept text request', () => {
     var convoAnalyticsApi = new ConvoAnalyticsApi('MY_TOKEN', { language: 'de' });
-    assert(convoAnalyticsApi.textRequest('my query', { sessionId: 'mySessionToken' }) !== null, 'cannot make a text request');
+    assert(convoAnalyticsApi.textRequest({ 
+      messageId: 'this-is-my-test-message-id', 
+      text: 'Hello Test !', 
+      sessionId: 'mySessionToken',
+      sentTimestamp: Date.now() 
+    }) !== null, 'cannot make a text request');
     
   });
 

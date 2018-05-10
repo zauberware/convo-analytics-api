@@ -2,24 +2,49 @@
 
 For connecting with the convo analytics API. 
 
-# Features
+## Installation
+
+### API Key
+
+We are providing a lightweight web application to track, analyse and structure the conversations of all bots you have currently out there.
+
+Create an account and retrieve an API key here ->
+
+Add your API key to your environment variables. (e.g. in .env)
+
+`CONVO_ANALYTICS_API_KEY=XXXAAAAPPPIIIIXXXXX`
+
+### Install npm package
+
+`npm install convo-analytics-api`
+
+### Send a message to API
+
+```
+var ConvoAnalyticsApi = require('convo-analytics-api').default;
+
+var convoAnalyticsApi = new ConvoAnalyticsApi(process.env.CONVO_ANALYTICS_API_KEY, { /* options */ });
+
+convoAnalyticsApi.textRequest({
+  timezone: undefined,
+  language: 'en',
+  sessionId: 'dcebb4c0-53de-11e8-889f-c51226743c13',
+  messageId: 'eb899e70-53de-11e8-889f-c51226743c13',
+  sentTimestamp: 1525907752430,
+  type: 'message_sent',
+  text: 'Hurra, ein Account ist da!',
+  user: 'ea6f051d-d053-bfd5-430e-fe4eac9044c3',
+  channel: 'socket',
+  originalRequest: { /* whatever you original message was */ }
+});
+
+```
+
+## Features
 * Send textMessages to your account
 
-# Upcoming
+## Upcoming
 * Send imageMessage to your account
 * Send audioMessage to your account
 * Send videoMessage to your account
-
-# Commands
-- `npm run clean` - Remove `lib/` directory
-- `npm test` - Run tests. Tests can be written with ES6 (WOW!)
-- `npm test:watch` - You can even re-run tests on file changes!
-- `npm run cover` - Yes. You can even cover ES6 code.
-- `npm run lint` - We recommend using [airbnb-config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb). It's fantastic.
-- `npm run test:examples` - We recommend writing examples on pure JS for better understanding module usage.
-- `npm run build` - Do some magic with ES6 to create ES5 code.
-- `npm run prepublish` - Hook for npm. Do all the checks before publishing you module.
-
-# Installation
-Just clone this repo and run `npm install`.
 

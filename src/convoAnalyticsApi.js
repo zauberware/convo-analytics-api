@@ -1,19 +1,19 @@
 import TextRequest from './textRequest';
-var https = require('https');
 
+const https = require('https');
 /**
  * Module variables.
  * @private
  */
 
-var version = '20180509';
-var language = 'en';
-var hostname = 'ocjdjdwcvl.execute-api.eu-central-1.amazonaws.com';
-var endpoint = '/latest/message/';
-var defaultSource = 'node';
+const version = '20180509';
+const language = 'en';
+const hostname = 'ocjdjdwcvl.execute-api.eu-central-1.amazonaws.com';
+const endpoint = '/latest/message/';
+const defaultSource = 'node';
 
 class ConvoAnalyticsApi {
-  constructor (clientAccessToken, options) {
+  constructor(clientAccessToken, options) {
     this.language = options.language || language;
     this.clientAccessToken = clientAccessToken;
     this.hostname = options.hostname || hostname;
@@ -21,22 +21,20 @@ class ConvoAnalyticsApi {
     this.endpoint = options.endpoint || endpoint;
     this.requestSource = options.requestSource || defaultSource;
 
-    this._agent = new https.Agent({ keepAlive: true });
+    this.agent = new https.Agent({ keepAlive: true });
   }
 
-  textRequest (message, options) {
-    var self = this;
-    var opt = options || {};
+  textRequest(message, options) {
+    const opt = options || {};
 
     if (!('endpoint' in opt)) {
-      opt.endpoint = self.endpoint;
+      opt.endpoint = this.endpoint;
     }
 
     if (!('version' in opt)) {
-      opt.version = self.version;
+      opt.version = this.version;
     }
-    console.log(message);
-    return new TextRequest(self, message, opt);
+    return new TextRequest(this, message, opt);
   }
 }
 

@@ -1,68 +1,62 @@
-var EventEmitter = require('events').EventEmitter;
-// var util = require('util');
-var https = require('https');
+/* eslint-disable class-methods-use-this */
+const EventEmitter = require('events').EventEmitter;
+const https = require('https');
 
 class ApiRequest extends EventEmitter {
-  constructor (application, options) {
+  constructor(application, options) {
     super();
-    var self = this;
 
-    self.clientAccessToken = application.clientAccessToken;
-
-    self.hostname = application.hostname;
-
-    self.endpoint = options.endpoint;
-    self.requestSource = application.requestSource;
-
-    self._agent = application._agent;
-
+    this.clientAccessToken = application.clientAccessToken;
+    this.hostname = application.hostname;
+    this.endpoint = options.endpoint;
+    this.requestSource = application.requestSource;
+    this.agent = application.agent;
   }
 
-  doRequest (){
-    var self = this;
-    var requestOptions = self._requestOptions();
+  doRequest() {
+    let request = null;
+    const self = this;
+    const requestOptions = self.requestOptions();
 
-    requestOptions.agent = self._agent;
+    requestOptions.agent = self.agent;
 
-    var request = https.request(requestOptions, function (response) {
-      self._handleResponse(response);
+    request = https.request(requestOptions, (response) => {
+      self.handleResponse(response);
     });
 
-    request.on('error', function (error) {
+    request.on('error', (error) => {
       self.emit('error', error);
     });
 
     self.request = request;
   }
 
-  _handleResponse (response) {
+  handleResponse() {
     throw new Error('Cant call abstract method!');
   }
 
-  _headers () {
-    var self = this;
+  headers() {
+    const bearer = 'Bearer ' + this.clientAccessToken;
 
     return {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + self.clientAccessToken,
-      'api-request-source': self.requestSource,
+      Accept: 'application/json',
+      Authorization: bearer,
+      'api-request-source': this.requestSource,
     };
   }
 
-  _requestOptions () {
-    var self = this;
-
+  requestOptions() {
     return {
-      hostname: self.hostname,
-      headers: self._headers(),
+      hostname: this.hostname,
+      headers: this.headers(),
     };
   }
 
-  write (chunk) {
+  write(chunk) {
     this.request.write(chunk);
   }
 
-  end () {
+  end() {
     this.request.end();
   }
 }
