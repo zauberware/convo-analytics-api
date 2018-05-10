@@ -39,7 +39,7 @@ class ApiRequest extends EventEmitter {
 
     return {
       Accept: 'application/json',
-      'x-api-key': bearer
+      'x-api-key': bearer,
     };
   }
 

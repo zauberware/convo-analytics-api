@@ -10,7 +10,6 @@ const version = '20180509';
 const language = 'en';
 const hostname = '8a0budp823.execute-api.eu-central-1.amazonaws.com';
 const endpoint = '/latest/messages/';
-const defaultSource = 'node';
 
 class ConvoAnalyticsApi {
   constructor(clientAccessToken, options) {
