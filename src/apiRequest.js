@@ -36,11 +36,11 @@ class ApiRequest extends EventEmitter {
   }
 
   headers() {
-    const bearer = 'Bearer ' + this.clientAccessToken;
+    const bearer = this.clientAccessToken;
 
     return {
       Accept: 'application/json',
-      Authorization: bearer,
+      'x-api-key': bearer,
       'api-request-source': this.requestSource,
     };
   }
