@@ -9,8 +9,6 @@ class JSONApiRequest extends ApiRequest {
     let buffers = [];
     let bufferLength = 0;
 
-    console.log(response);
-
     response.on('data', (chunk) => {
       bufferLength += chunk.length;
       buffers.push(chunk);
