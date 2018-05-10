@@ -19,7 +19,6 @@ class ConvoAnalyticsApi {
     this.hostname = options.hostname || hostname;
     this.version = options.version || version;
     this.endpoint = options.endpoint || endpoint;
-    this.requestSource = options.requestSource || defaultSource;
 
     this.agent = new https.Agent({ keepAlive: true });
   }

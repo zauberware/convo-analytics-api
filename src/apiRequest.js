@@ -9,7 +9,6 @@ class ApiRequest extends EventEmitter {
     this.clientAccessToken = application.clientAccessToken;
     this.hostname = application.hostname;
     this.endpoint = options.endpoint;
-    this.requestSource = application.requestSource;
     this.agent = application.agent;
   }
 
@@ -40,8 +39,7 @@ class ApiRequest extends EventEmitter {
 
     return {
       Accept: 'application/json',
-      'x-api-key': bearer,
-      'api-request-source': this.requestSource,
+      'x-api-key': bearer
     };
   }
 

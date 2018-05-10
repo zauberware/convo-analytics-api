@@ -3,6 +3,11 @@ import QueryRequest from './queryRequest';
 class TextRequest extends QueryRequest {
   constructor(application, message, options) {
     super(application, message, options);
+    
+    if ('text' in message) {
+      this.text = message.text;
+    }
+
     this.doRequest();
   }
 
@@ -14,7 +19,11 @@ class TextRequest extends QueryRequest {
 
   jsonRequestParameters() {
     const json = super.jsonRequestParameters();
-    json.messageType = 'TextRequest';
+    
+    if ('text' in this) {
+      json.text = this.text;
+    }
+    
     return json;
   }
 

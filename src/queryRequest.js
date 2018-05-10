@@ -4,54 +4,61 @@ class QueryRequest extends JSONApiRequest {
   constructor(application, message, options) {
     super(application, options);
 
+    // try to set lang from app
     this.language = application.language;
 
-    if ('requestSource' in application) {
-      this.requestSource = application.requestSource;
-    }
-
-    // Check for options
-    if ('timezone' in options) {
-      this.timezone = options.timezone;
-    }
-
-    // Check for message date
-    if ('sessionId' in message) {
-      this.sessionId = message.sessionId;
+    // required fields
+    if ('user_id' in message) {
+      this.user_id = message.user_id;
     } else {
-      throw Error('Now "sessionId" is required parameter. Please add this parameter to "options" of request.');
+      throw Error('Now "user_id" is required parameter. Please add this parameter to "options" of request.');
     }
 
-    if ('messageId' in message) {
-      this.messageId = message.messageId;
-    } else {
-      throw Error('Now "messageId" is required parameter. Please add this parameter to "options" of request.');
-    }
-
-    if ('sentTimestamp' in message) {
-      this.sentTimestamp = message.sentTimestamp;
-    } else {
-      throw Error('Now "sentTimestamp" is required parameter. Please add this parameter to "options" of request.');
-    }
-
-    if ('type' in message) {
+    if ('type' in message && (message.type === 'user' || message.type === 'agent')) {
       this.type = message.type;
+    } else {
+      throw Error('Now "type" is required parameter and has to be "user" or "agent". Please add this parameter to "options" of request.');
     }
 
-    if ('text' in message) {
-      this.text = message.text;
+    if ('time_stamp' in message) {
+      this.time_stamp = message.time_stamp;
+    } else {
+      throw Error('Now "time_stamp" is required parameter. Please add this parameter to "options" of request.');
     }
 
-    if ('user' in message) {
-      this.user = message.user;
+    if ('platform' in message) {
+      this.platform = message.platform;
+    } else {
+      throw Error('Now "platform" is required parameter. Please add this parameter to "options" of request.');
     }
 
-    if ('channel' in message) {
-      this.channel = message.channel;
+    // optional fields
+    if ('session_id' in message) {
+      this.session_id = message.session_id;
     }
 
-    if ('originalRequest' in message) {
-      this.originalRequest = message.originalRequest;
+    if ('timezone' in message) {
+      this.timezone = message.timezone;
+    }
+
+    if ('language' in message) {
+      this.language = message.language;
+    }
+
+    if ('intent' in message) {
+      this.intent = message.intent;
+    }
+
+    if ('version' in message) {
+      this.version = message.version;
+    }
+
+    if ('handled' in message) {
+      this.handled = message.handled;
+    }
+
+    if ('original_request' in message) {
+      this.original_request = message.original_request;
     }
   }
 
@@ -68,27 +75,34 @@ class QueryRequest extends JSONApiRequest {
 
   jsonRequestParameters() {
     const json = {
-      timezone: this.timezone,
-      language: this.language,
-      sessionId: this.sessionId,
-      messageId: this.messageId,
-      sentTimestamp: this.sentTimestamp,
+      user_id: this.user_id,
+      type: this.type,
+      time_stamp: this.time_stamp,
+      platform: this.platform,
     };
 
-    if ('type' in this) {
-      json.type = this.type;
+    if ('session_id' in this) {
+      json.session_id = this.session_id;
     }
 
-    if ('text' in this) {
-      json.text = this.text;
+    if ('timezone' in this) {
+      json.timezone = this.timezone;
     }
 
-    if ('user' in this) {
-      json.user = this.user;
+    if ('language' in this) {
+      json.language = this.language;
     }
 
-    if ('channel' in this) {
-      json.channel = this.channel;
+    if ('intent' in this) {
+      json.intent = this.intent;
+    }
+
+    if ('version' in this) {
+      json.version = this.version;
+    }
+
+    if ('handled' in this) {
+      json.handled = this.handled;
     }
 
     if ('originalRequest' in this) {
