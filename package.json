@@ -1,6 +1,6 @@
 {
   "name": "convo-analytics-api",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "JS API client for convo.anayltics",
   "main": "./lib/convoAnalyticsApi.js",
   "scripts": {
