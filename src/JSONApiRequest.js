@@ -9,6 +9,8 @@ class JSONApiRequest extends ApiRequest {
     let buffers = [];
     let bufferLength = 0;
 
+    console.log(response);
+
     response.on('data', (chunk) => {
       bufferLength += chunk.length;
       buffers.push(chunk);
@@ -21,6 +23,7 @@ class JSONApiRequest extends ApiRequest {
 
       buffers = [];
       bufferLength = 0;
+
 
       if (response.statusCode >= statusOk && response.statusCode <= statusOkEnd) {
         try {

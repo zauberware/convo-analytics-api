@@ -1,10 +1,6 @@
 import { assert } from 'chai';
 import ConvoAnalyticsApi from '../src/convoAnalyticsApi';
 
-// var ConvoAnalyticsApi = require('../src/convoAnalyticsApi').default;
-
-// or import * as convoAnalyticsApi from '../src/convoAnalyticsApi';
-
 describe('Module exists', () => {
   it('should create a new API client', () => {
     var convoAnalyticsApi = new ConvoAnalyticsApi('MY_TOKEN', { language: 'de' });

@@ -20,6 +20,8 @@ class ApiRequest extends EventEmitter {
 
     requestOptions.agent = self.agent;
 
+    console.log(requestOptions);
+    
     request = https.request(requestOptions, (response) => {
       self.handleResponse(response);
     });
